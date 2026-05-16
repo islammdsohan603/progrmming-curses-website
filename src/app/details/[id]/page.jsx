@@ -17,6 +17,7 @@ import {
   UserRound,
   Users,
 } from 'lucide-react';
+import AddtoButtons from '@/comonentes/AddtoButtons';
 
 const DetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -120,13 +121,10 @@ const DetailsPage = async ({ params }) => {
               </div>
 
               <div className="mt-5 grid gap-3">
-                <button
-                  type="button"
-                  className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 text-sm font-bold text-white transition hover:bg-blue-700"
-                >
-                  <ShoppingCart className="size-4" />
-                  Add to Cart
-                </button>
+                <div>
+                  <AddtoButtons data={data} />
+                </div>
+
                 <button
                   type="button"
                   className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg border border-slate-200 px-5 text-sm font-bold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
