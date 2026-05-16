@@ -5,8 +5,17 @@ import NavLink from './NavLink';
 import MobileMenu from './MobailMenu';
 import { GraduationCap, Menu, X } from 'lucide-react';
 
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import { Avatar } from '@heroui/react';
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const route = useRouter();
+
+  const { data: session, isPending } = authClient.useSession();
+  const users = session?.user;
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200 bg-white/90 py-3 shadow-sm backdrop-blur-md">
@@ -31,18 +40,43 @@ const Navbar = () => {
         </ul>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href={'/login'}
-            className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
-          >
-            লগইন
-          </Link>
-          <Link
-            href={'/signup'}
-            className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-bold text-white shadow-md shadow-blue-100 transition hover:bg-blue-700"
-          >
-            শুরু করুন
-          </Link>
+          {users ? (
+            <div className="flex items-center gap-3">
+              <Avatar>
+                <Avatar.Image
+                  alt={users?.name}
+                  src={users?.image}
+                  referrerPolicy="no-referrer"
+                />
+                <Avatar.Fallback>{users?.name.charAt(0)}</Avatar.Fallback>
+              </Avatar>
+
+              <button
+                onClick={async () => {
+                  await authClient.signOut();
+                  route.push('/');
+                }}
+                className="bg-red-600 px-4 py-1 rounded-3xl cursor-pointer hover:bg-red-500 duration-300"
+              >
+                LogOut
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3">
+              <Link
+                href={'/login'}
+                className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
+              >
+                লগইন
+              </Link>
+              <Link
+                href={'/signup'}
+                className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-bold text-white shadow-md shadow-blue-100 transition hover:bg-blue-700"
+              >
+                শুরু করুন
+              </Link>
+            </div>
+          )}
         </div>
 
         <button

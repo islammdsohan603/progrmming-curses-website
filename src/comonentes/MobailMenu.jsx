@@ -2,6 +2,7 @@
 import NavLink from './NavLink';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+ 
 
 const MobileMenu = ({ isOpen }) => {
   return (
@@ -20,6 +21,8 @@ const MobileMenu = ({ isOpen }) => {
             <NavLink href={'/blog'}>ব্লগ</NavLink>
 
             <div className="flex w-full flex-col gap-3 border-t border-slate-100 pt-4">
+          
+
               <Link
                 href={'/login'}
                 className="rounded-lg border border-slate-200 py-2 text-center font-bold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
