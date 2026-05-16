@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import NavLink from './NavLink';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,26 +11,26 @@ const MobileMenu = ({ isOpen }) => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden overflow-hidden bg-white border-t border-gray-100"
+          className="overflow-hidden border-t border-slate-100 bg-white md:hidden"
         >
-          <ul className="flex flex-col items-center gap-6 py-8 px-4">
-            <NavLink href={'/'}>Home</NavLink>
-            <NavLink href={'/courses'}>Courses</NavLink>
-            <NavLink href={'/mentors'}>Mentors</NavLink>
-            <NavLink href={'/blog'}>Blog</NavLink>
+          <ul className="flex flex-col items-center gap-6 px-4 py-8">
+            <NavLink href={'/'}>হোম</NavLink>
+            <NavLink href={'/courses'}>কোর্স</NavLink>
+            <NavLink href={'/mentors'}>মেন্টর</NavLink>
+            <NavLink href={'/blog'}>ব্লগ</NavLink>
 
-            <div className="flex flex-col gap-4 w-full pt-4 border-t border-gray-100">
+            <div className="flex w-full flex-col gap-3 border-t border-slate-100 pt-4">
               <Link
                 href={'/login'}
-                className="text-center py-2 text-gray-600 font-medium hover:text-blue-600 transition"
+                className="rounded-lg border border-slate-200 py-2 text-center font-bold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
               >
-                LogIn
+                লগইন
               </Link>
               <Link
                 href={'/signup'}
-                className="text-center py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition shadow-md"
+                className="rounded-lg bg-blue-600 py-2 text-center font-bold text-white shadow-md transition hover:bg-blue-700"
               >
-                SignUp
+                শুরু করুন
               </Link>
             </div>
           </ul>

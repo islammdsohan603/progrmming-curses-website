@@ -1,58 +1,60 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import NavLink from './NavLink';
 import MobileMenu from './MobailMenu';
-import { Menu, X } from 'lucide-react';
+import { GraduationCap, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white/80 backdrop-blur-md shadow-sm py-4 fixed top-0 left-0 right-0 z-50 border-b-2 border-gray-100">
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
-        {/* Logo */}
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200 bg-white/90 py-3 shadow-sm backdrop-blur-md">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="text-xl md:text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+          className="inline-flex items-center gap-2 text-xl font-black text-slate-950"
         >
-          EduBangli
+          <span className="inline-flex size-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+            <GraduationCap className="size-6" />
+          </span>
+          <span className="bg-linear-to-r from-blue-700 to-emerald-600 bg-clip-text text-transparent">
+            EduBangli
+          </span>
         </Link>
 
-        {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center gap-8">
-          <NavLink href={'/'}>Home</NavLink>
-          <NavLink href={'/courses'}>Courses</NavLink>
-          <NavLink href={'/mentors'}>Mentors</NavLink>
-          <NavLink href={'/blog'}>Blog</NavLink>
+          <NavLink href={'/'}>হোম</NavLink>
+          <NavLink href={'/courses'}>কোর্স</NavLink>
+          <NavLink href={'/mentors'}>মেন্টর</NavLink>
+          <NavLink href={'/blog'}>ব্লগ</NavLink>
         </ul>
 
-        {/* Desktop Auth Buttons */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden items-center gap-3 md:flex">
           <Link
             href={'/login'}
-            className="px-4 py-2 text-white bg-base-100 rounded-3xl font-medium hover:text-blue-600 transition-colors"
+            className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-blue-200 hover:text-blue-700"
           >
-            LogIn
+            লগইন
           </Link>
           <Link
             href={'/signup'}
-            className="px-5 py-2 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all shadow-md hover:shadow-blue-200"
+            className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-bold text-white shadow-md shadow-blue-100 transition hover:bg-blue-700"
           >
-            SignUp
+            শুরু করুন
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
+          type="button"
+          aria-label="Toggle mobile menu"
+          className="rounded-lg p-2 text-slate-600 transition hover:bg-slate-100 md:hidden"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </nav>
 
-      {/* Mobile Menu Component */}
       <MobileMenu isOpen={isOpen} />
     </header>
   );
