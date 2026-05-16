@@ -13,6 +13,7 @@ import {
 import { ArrowRight, Mail, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import SosailLoginButton from '@/comonentes/SosailLoginButton';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -181,6 +182,8 @@ const LoginPage = () => {
                   মেনে চলছেন
                 </p>
               </Form>
+
+              <SosailLoginButton />
             </div>
           </div>
         </div>
