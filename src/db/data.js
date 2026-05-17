@@ -6,7 +6,11 @@ export const getData = async () => {
 
 
 export const getDetailsData = async (id) => {
-  const res = await fetch(`http://localhost:4000/cursor/${id}`);
+  const res = await fetch(`http://localhost:4000/cursor/${id}`, {
+    headers: {
+      authorization: "logged in"
+    }
+  });
 
   const data = await res.json();
 
