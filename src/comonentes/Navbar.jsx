@@ -42,24 +42,16 @@ const Navbar = () => {
         <div className="hidden items-center gap-3 md:flex">
           {users ? (
             <div className="flex items-center gap-3">
-              <Avatar>
-                <Avatar.Image
-                  alt={users?.name}
-                  src={users?.image}
-                  referrerPolicy="no-referrer"
-                />
-                <Avatar.Fallback>{users?.name.charAt(0)}</Avatar.Fallback>
-              </Avatar>
-
-              <button
-                onClick={async () => {
-                  await authClient.signOut();
-                  route.push('/');
-                }}
-                className="bg-red-600 px-4 py-1 rounded-3xl cursor-pointer hover:bg-red-500 duration-300"
-              >
-                LogOut
-              </button>
+              <Link href={`/profile`}>
+                <Avatar>
+                  <Avatar.Image
+                    alt={users?.name}
+                    src={users?.image}
+                    referrerPolicy="no-referrer"
+                  />
+                  <Avatar.Fallback>{users?.name.charAt(0)}</Avatar.Fallback>
+                </Avatar>
+              </Link>
             </div>
           ) : (
             <div className="flex items-center gap-3">

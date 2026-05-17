@@ -98,12 +98,13 @@ const SignUpPage = () => {
                     <User className="size-4 text-blue-400" />
                     আপনার নাম
                   </Label>
+
                   <Input
-                    isRequired
+                    required
                     name="name"
                     type="text"
                     placeholder="মো. আরিফ হাসান"
-                    className="bg-slate-800/50 text-white w-full placeholder:text-slate-500"
+                    className="w-full bg-slate-800/50 text-white placeholder:text-slate-500"
                   />
                 </div>
 
@@ -112,8 +113,8 @@ const SignUpPage = () => {
                     <Mail className="size-4 text-blue-400" />
                     ইমেইল অ্যাড্রেস
                   </Label>
+
                   <TextField
-                    isRequired
                     name="email"
                     type="email"
                     validate={value => {
@@ -122,13 +123,16 @@ const SignUpPage = () => {
                       ) {
                         return 'সঠিক ইমেইল লিখুন';
                       }
+
                       return null;
                     }}
                   >
                     <Input
+                      required
                       placeholder="you@example.com"
                       className="bg-slate-800/50 text-white placeholder:text-slate-500"
                     />
+
                     <FieldError className="text-xs text-red-400" />
                   </TextField>
                 </div>
@@ -138,8 +142,8 @@ const SignUpPage = () => {
                     <Lock className="size-4 text-blue-400" />
                     পাসওয়ার্ড
                   </Label>
+
                   <TextField
-                    isRequired
                     minLength={8}
                     name="password"
                     type="password"
@@ -147,26 +151,32 @@ const SignUpPage = () => {
                       if (value.length < 8) {
                         return 'কমপক্ষে ৮ ক্যারেক্টার প্রয়োজন';
                       }
+
                       if (!/[A-Z]/.test(value)) {
                         return 'এক টা বড় লেটার থাকতে হবে';
                       }
+
                       if (!/[0-9]/.test(value)) {
                         return 'এক টা নাম্বার থাকতে হবে';
                       }
+
                       return null;
                     }}
                   >
                     <Input
+                      required
                       placeholder="••••••••"
+                      autoComplete="new-password"
                       className="bg-slate-800/50 text-white placeholder:text-slate-500"
                     />
+
                     <Description className="mt-1 text-xs text-slate-400">
                       ন্যূনতম ৮ ক্যারেক্টার, ১ বড় লেটার এবং ১ নাম্বার
                     </Description>
+
                     <FieldError className="text-xs text-red-400" />
                   </TextField>
                 </div>
-
                 <Button
                   type="submit"
                   className="mt-8 w-full bg-linear-to-r from-blue-600 to-blue-700 font-black text-white transition hover:from-blue-700 hover:to-blue-800"
