@@ -3,18 +3,31 @@
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
+import { toast } from 'react-toastify';
 
 const SosailLoginButton = () => {
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
-    await authClient.signIn.social({
-      provider: 'google',
-    });
-
     if (loading) return;
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+
+    try {
+      const { data, error } = await authClient.signIn.social({
+        provider: 'google',
+      });
+
+      if (error) {
+        toast.error(error.message || 'Google sign in failed');
+      } else if (data) {
+        toast.success('Google sign in successful');
+      }
+    } catch (err) {
+      console.error('Google sign in error:', err);
+      toast.error('Google sign in failed');
+    } finally {
+      setTimeout(() => setLoading(false), 2000);
+    }
   };
 
   return (
