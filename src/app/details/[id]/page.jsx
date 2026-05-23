@@ -1,6 +1,7 @@
 import { getDetailsData } from '@/db/data';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import {
   ArrowLeft,
   BadgeCheck,
@@ -19,9 +20,15 @@ import {
 } from 'lucide-react';
 import AddtoButtons from '@/comonentes/AddtoButtons';
 
+export const dynamic = 'force-dynamic';
+
 const DetailsPage = async ({ params }) => {
   const { id } = await params;
   const data = await getDetailsData(id);
+  if (!data) {
+    notFound();
+  }
+
   const features = data.features ?? [];
 
   return (

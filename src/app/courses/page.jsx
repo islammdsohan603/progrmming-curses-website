@@ -7,6 +7,8 @@ import {
   Users,
 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 const CoursesPage = async () => {
   const data = await getData();
   const courses = Array.isArray(data) ? data : [];

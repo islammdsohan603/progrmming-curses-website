@@ -97,6 +97,7 @@ const LoginPage = () => {
                     isRequired
                     name="email"
                     type="email"
+                    autoComplete="email"
                     validate={value => {
                       if (
                         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
@@ -108,6 +109,7 @@ const LoginPage = () => {
                   >
                     <Input
                       placeholder="you@example.com"
+                      autoComplete="email"
                       className="bg-slate-800/50 text-white placeholder:text-slate-500"
                     />
                     <FieldError className="text-xs text-red-400" />
@@ -132,6 +134,7 @@ const LoginPage = () => {
                     minLength={8}
                     name="password"
                     type="password"
+                    autoComplete="current-password"
                     validate={value => {
                       if (value.length < 8) {
                         return 'কমপক্ষে ৮ ক্যারেক্টার প্রয়োজন';
@@ -147,6 +150,7 @@ const LoginPage = () => {
                   >
                     <Input
                       placeholder="••••••••"
+                      autoComplete="current-password"
                       className="bg-slate-800/50 text-white placeholder:text-slate-500"
                     />
                     <Description className="mt-1 text-xs text-slate-400">

@@ -36,39 +36,50 @@
 
 ## 📖 Overview
 
-**EduBangli** is a full-featured, Bengali-language online education platform that offers project-based tech courses, live mentorship, and career preparation support. Built with modern web technologies, it provides a premium learning experience with live classes, real-world project assignments, code reviews, and career guidance — all in Bangla.
+**EduBangli** is a full-featured, Bengali-language online education platform
+that offers project-based tech courses, live mentorship, and career preparation
+support. Built with modern web technologies, it provides a premium learning
+experience with live classes, real-world project assignments, code reviews, and
+career guidance — all in Bangla.
 
 ---
 
 ## ✨ Features
 
 ### 🏠 Landing Page
+
 - Hero banner with animated stats (12K+ learners, 48+ courses, 4.9/5 rating)
 - Course search functionality
-- Career track categories (Web Dev, MERN Stack, UI/UX Design, Programming Basics)
+- Career track categories (Web Dev, MERN Stack, UI/UX Design, Programming
+  Basics)
 - Featured courses showcase with pricing, duration, and skill tags
 - Step-by-step learning flow explanation
 - Mentorship highlights section
 - CTA section for new batch enrollment
 
 ### 📚 Course Catalog
+
 - Browse all available courses
 - Course cards with detailed info (price, duration, lessons, ratings)
 - Dynamic course data fetched from backend API
 
 ### 📝 Course Details
+
 - Individual course page with full description
 - Skill tags, pricing, and enrollment options
 
 ### 🔐 Authentication
+
 - Email & password registration/login
 - Google OAuth social login
 - Session management with **Better Auth**
 - Protected routes for authenticated users
 
 ### 👤 User Dashboard
+
 - Personalized welcome message
-- Learning progress stats (running courses, completed, learning hours, certificates)
+- Learning progress stats (running courses, completed, learning hours,
+  certificates)
 - Enrolled courses with progress bars
 - Upcoming live class schedule
 - Certificates management
@@ -76,12 +87,15 @@
 - Account settings
 
 ### 👨‍🏫 Mentors Page
+
 - Browse available mentors and their expertise
 
 ### 📰 Blog
+
 - Educational blog posts and articles
 
 ### 🧭 Navigation
+
 - Responsive navbar with glassmorphism effect
 - Mobile hamburger menu
 - Dynamic auth state (login/signup buttons or user avatar)
@@ -89,25 +103,24 @@
 
 ---
 
-## Live Demo: https://programing-curors.vercel.app
-
+## Live Demo: https://programing-curors.vercel.app/
 
 ## 🛠️ Tech Stack
 
-| Layer              | Technology                                                              |
-| ------------------ | ----------------------------------------------------------------------- |
-| **Framework**      | [Next.js 16](https://nextjs.org/) (App Router)                         |
-| **UI Library**     | [React 19](https://react.dev/)                                         |
-| **Styling**        | [Tailwind CSS 4](https://tailwindcss.com/) + [DaisyUI 5](https://daisyui.com/) |
-| **UI Components**  | [HeroUI](https://heroui.com/)                                          |
-| **Animations**     | [Framer Motion](https://motion.dev/)                                   |
+| Layer              | Technology                                                                       |
+| ------------------ | -------------------------------------------------------------------------------- |
+| **Framework**      | [Next.js 16](https://nextjs.org/) (App Router)                                   |
+| **UI Library**     | [React 19](https://react.dev/)                                                   |
+| **Styling**        | [Tailwind CSS 4](https://tailwindcss.com/) + [DaisyUI 5](https://daisyui.com/)   |
+| **UI Components**  | [HeroUI](https://heroui.com/)                                                    |
+| **Animations**     | [Framer Motion](https://motion.dev/)                                             |
 | **Icons**          | [Lucide React](https://lucide.dev/) + [Radix Icons](https://icons.radix-ui.com/) |
-| **Authentication** | [Better Auth](https://www.better-auth.com/) (Email + Google OAuth)     |
-| **Database**       | [MongoDB Atlas](https://www.mongodb.com/atlas)                         |
-| **Fonts**          | [Geist](https://vercel.com/font) (Sans + Mono)                        |
-| **Notifications**  | [React Toastify](https://fkhadra.github.io/react-toastify/)           |
-| **Deployment**     | [Vercel](https://vercel.com/)                                          |
-| **Compiler**       | [React Compiler](https://react.dev/learn/react-compiler) (enabled)     |
+| **Authentication** | [Better Auth](https://www.better-auth.com/) (Email + Google OAuth)               |
+| **Database**       | [MongoDB Atlas](https://www.mongodb.com/atlas)                                   |
+| **Fonts**          | [Geist](https://vercel.com/font) (Sans + Mono)                                   |
+| **Notifications**  | [React Toastify](https://fkhadra.github.io/react-toastify/)                      |
+| **Deployment**     | [Vercel](https://vercel.com/)                                                    |
+| **Compiler**       | [React Compiler](https://react.dev/learn/react-compiler) (enabled)               |
 
 ---
 
@@ -137,7 +150,8 @@
 
 3. **Set up environment variables**
 
-   Create a `.env` file in the root directory (see [Environment Variables](#environment-variables)):
+   Create a `.env` file in the root directory (see
+   [Environment Variables](#environment-variables)):
 
    ```bash
    cp .env.example .env
@@ -232,18 +246,19 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 NEXT_PUBLIC_SERVER_URL=https://your-backend-server.vercel.app
 ```
 
-> **⚠️ Important:** Never commit your `.env` file to version control. It is already included in `.gitignore`.
+> **⚠️ Important:** Never commit your `.env` file to version control. It is
+> already included in `.gitignore`.
 
 ---
 
 ## 📜 Available Scripts
 
-| Command          | Description                              |
-| ---------------- | ---------------------------------------- |
-| `npm run dev`    | Start development server on `localhost:3000` |
-| `npm run build`  | Create optimized production build        |
-| `npm run start`  | Start production server                  |
-| `npm run lint`   | Run ESLint for code quality checks       |
+| Command         | Description                                  |
+| --------------- | -------------------------------------------- |
+| `npm run dev`   | Start development server on `localhost:3000` |
+| `npm run build` | Create optimized production build            |
+| `npm run start` | Start production server                      |
+| `npm run lint`  | Run ESLint for code quality checks           |
 
 ---
 
@@ -251,7 +266,8 @@ NEXT_PUBLIC_SERVER_URL=https://your-backend-server.vercel.app
 
 This project is deployed on **Vercel** with a separate backend server.
 
-> **🔗 Live Production URL:** [https://programing-curors.vercel.app](https://programing-curors.vercel.app)
+> **🔗 Live Production URL:**
+> [https://programing-curors.vercel.app](https://programing-curors.vercel.app)
 
 ### Deploy to Vercel
 
@@ -284,11 +300,13 @@ This project is deployed on **Vercel** with a separate backend server.
 ## 🎨 Design System
 
 - **Typography:** Geist Sans & Geist Mono (Vercel fonts)
-- **Color Palette:** Slate-based neutrals with Blue, Emerald, Amber, and Rose accents
+- **Color Palette:** Slate-based neutrals with Blue, Emerald, Amber, and Rose
+  accents
 - **Components:** DaisyUI + HeroUI component library
 - **Layout:** Responsive grid system (mobile-first)
 - **Effects:** Glassmorphism navbar, hover animations, smooth transitions
-- **Language:** Bengali (bn) as primary language with English for technical terms
+- **Language:** Bengali (bn) as primary language with English for technical
+  terms
 
 ---
 
