@@ -10,8 +10,10 @@ import {
 export const dynamic = "force-dynamic";
 
 const CoursesPage = async () => {
-  const data = await getData();
+  const apiResult = await getData();
+  const data = apiResult.data;
   const courses = Array.isArray(data) ? data : [];
+  const apiError = apiResult.error;
   const totalStudents = courses.reduce(
     (total, course) => total + (Number(course.students) || 0),
     0
@@ -44,7 +46,7 @@ const CoursesPage = async () => {
           </div>
         </div>
 
-        <CoursesContainer data={courses} />
+        <CoursesContainer data={courses} apiError={apiError} apiUrl={apiResult.url} />
       </section>
     </main>
   );

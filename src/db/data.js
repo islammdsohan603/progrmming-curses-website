@@ -1,9 +1,11 @@
+const DEFAULT_SERVER_URL = "https://backendmang.vercel.app";
+
 const getServerUrl = () => {
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || DEFAULT_SERVER_URL;
 
   if (!serverUrl) {
     console.warn("NEXT_PUBLIC_SERVER_URL is not configured.");
-    return null;
+    return DEFAULT_SERVER_URL;
   }
 
   return serverUrl.replace(/\/$/, "");
@@ -11,11 +13,6 @@ const getServerUrl = () => {
 
 const fetchJson = async (path, fallback) => {
   const serverUrl = getServerUrl();
-
-  if (!serverUrl) {
-    return fallback;
-  }
-
   const url = `${serverUrl}${path}`;
 
   try {
@@ -23,19 +20,48 @@ const fetchJson = async (path, fallback) => {
     const contentType = res.headers.get("content-type") || "";
 
     if (!res.ok) {
-      console.warn(`API request failed: ${url} returned ${res.status}`);
-      return fallback;
+      let message = `API request failed: ${url} returned ${res.status}`;
+
+      if (contentType.includes("application/json")) {
+        const body = await res.json();
+        message = body?.error || body?.message || message;
+      }
+
+      console.warn(message);
+      return {
+        data: fallback,
+        error: message,
+        status: res.status,
+        url,
+      };
     }
 
     if (!contentType.includes("application/json")) {
-      console.warn(`API request did not return JSON: ${url}`);
-      return fallback;
+      const message = `API request did not return JSON: ${url}`;
+
+      console.warn(message);
+      return {
+        data: fallback,
+        error: message,
+        status: res.status,
+        url,
+      };
     }
 
-    return await res.json();
+    return {
+      data: await res.json(),
+      error: null,
+      status: res.status,
+      url,
+    };
   } catch (error) {
     console.warn(`API request failed: ${url}`, error);
-    return fallback;
+    return {
+      data: fallback,
+      error: error.message,
+      status: 0,
+      url,
+    };
   }
 };
 

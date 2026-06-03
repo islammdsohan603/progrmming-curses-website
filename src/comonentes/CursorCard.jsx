@@ -22,13 +22,16 @@ const CursorCard = ({ cursoeItem }) => {
     students,
     features = [],
   } = cursoeItem;
+  const imageSrc = image || "/banner.jpg";
+  const courseTitle = title || "Course";
+  const courseFeatures = Array.isArray(features) ? features : [];
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-200">
       <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
         <Image
-          src={image}
-          alt={title}
+          src={imageSrc}
+          alt={courseTitle}
           width={640}
           height={480}
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
@@ -56,11 +59,11 @@ const CursorCard = ({ cursoeItem }) => {
         </div>
 
         <h3 className="mt-4 text-xl font-black leading-snug text-slate-950">
-          {title}
+          {courseTitle}
         </h3>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {features.slice(0, 3).map((feature) => (
+          {courseFeatures.slice(0, 3).map((feature) => (
             <span
               key={feature}
               className="rounded-lg border border-slate-200 px-2.5 py-1 text-xs font-bold text-slate-600"

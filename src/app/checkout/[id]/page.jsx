@@ -1,6 +1,7 @@
 import { getDetailsData } from '@/db/data';
 import Image from 'next/image';
 import {
+  AlertCircle,
   BadgeCheck,
   CreditCard,
   ShieldCheck,
@@ -12,7 +13,8 @@ import OrderButton from '@/comonentes/OrderButton';
 const CheckOutPage = async ({ params }) => {
   const { id } = await params;
 
-  const userData = await getDetailsData(id);
+  const apiResult = await getDetailsData(id);
+  const userData = apiResult.data;
 
   return (
     <main className="min-h-screen bg-slate-100 pt-28 pb-16">
@@ -160,6 +162,18 @@ const CheckOutPage = async ({ params }) => {
 
           {/* RIGHT SIDE */}
           <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-28">
+            {apiResult.error && (
+              <div className="mb-4 rounded-xl border border-rose-200 bg-rose-50 p-4 text-rose-800">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="mt-0.5 size-4 shrink-0" />
+                  <p className="text-xs font-bold leading-5">
+                    Backend থেকে কোর্স ডাটা পাওয়া যায়নি। নিচে fallback course
+                    info দেখানো হচ্ছে।
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Course Image */}
             <div className="relative h-52 overflow-hidden rounded-2xl">
               <Image

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
+  AlertCircle,
   ArrowLeft,
   BadgeCheck,
   BookOpenCheck,
@@ -24,12 +25,49 @@ export const dynamic = 'force-dynamic';
 
 const DetailsPage = async ({ params }) => {
   const { id } = await params;
-  const data = await getDetailsData(id);
-  if (!data) {
+  const apiResult = await getDetailsData(id);
+  const data = apiResult.data;
+
+  if (!apiResult.error && !data) {
     notFound();
   }
 
+  if (apiResult.error) {
+    return (
+      <main className="min-h-screen bg-slate-50 pt-28 pb-20">
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <Link
+            href="/courses"
+            className="inline-flex items-center gap-2 text-sm font-bold text-blue-700 transition hover:text-blue-800"
+          >
+            <ArrowLeft className="size-4" />
+            কোর্সে ফিরে যান
+          </Link>
+
+          <div className="mt-6 rounded-lg border border-rose-200 bg-rose-50 p-6 text-rose-800">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="mt-1 size-6 shrink-0" />
+              <div>
+                <h1 className="text-2xl font-black">
+                  কোর্স ডিটেইলস লোড হচ্ছে না
+                </h1>
+                <p className="mt-3 text-sm leading-6">
+                  Backend API থেকে এই কোর্সের ডাটা পাওয়া যায়নি। backend
+                  redeploy করে /cursor/:id endpoint ঠিক আছে কিনা দেখুন।
+                </p>
+                <p className="mt-3 break-all text-xs font-semibold">
+                  API: {apiResult.url}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   const features = data.features ?? [];
+  const imageSrc = data.image || '/banner.jpg';
 
   return (
     <main className="min-h-screen bg-slate-50 pt-28 pb-20">
@@ -46,8 +84,8 @@ const DetailsPage = async ({ params }) => {
           <article className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
             <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
               <Image
-                src={data.image}
-                alt={data.title}
+                src={imageSrc}
+                alt={data.title || 'Course'}
                 fill
                 priority
                 sizes="(min-width: 1024px) 70vw, 100vw"

@@ -13,11 +13,16 @@ const requiredEnv = (name) => {
 const baseURL = requiredEnv("BETTER_AUTH_URL");
 const client = new MongoClient(requiredEnv("MONGO_URI"));
 const db = client.db('aicurose');
+const trustedOrigins = [
+  baseURL,
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+].filter(Boolean);
 
 export const auth = betterAuth({
   baseURL,
   secret: requiredEnv("BETTER_AUTH_SECRET"),
-  trustedOrigins: [baseURL],
+  trustedOrigins,
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import CursorCard from "@/comonentes/CursorCard";
 import {
+  AlertCircle,
   ArrowLeft,
   ArrowRight,
   BadgeCheck,
@@ -22,7 +23,7 @@ const sortOptions = [
   { value: "priceHigh", label: "বেশি দাম" },
 ];
 
-const CoursesContainer = ({ data = [] }) => {
+const CoursesContainer = ({ data = [], apiError = null, apiUrl = "" }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -244,17 +245,42 @@ const CoursesContainer = ({ data = [] }) => {
             ))}
           </div>
         ) : (
-          <div className="mt-6 rounded-lg border border-dashed border-slate-300 bg-white p-10 text-center">
-            <p className="text-lg font-black text-slate-950">
+          <div
+            className={`mt-6 rounded-lg border p-10 text-center ${
+              apiError
+                ? "border-rose-200 bg-rose-50"
+                : "border-dashed border-slate-300 bg-white"
+            }`}
+          >
+            {apiError && (
+              <AlertCircle className="mx-auto mb-3 size-7 text-rose-600" />
+            )}
+            {apiError && (
+              <div>
+                <p className="text-lg font-black text-slate-950">
+                  কোর্স ডাটা লোড হচ্ছে না
+                </p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Backend API থেকে ডাটা পাওয়া যায়নি। backend redeploy করে
+                  /cursor endpoint ঠিক আছে কিনা দেখুন।
+                </p>
+                {apiUrl && (
+                  <p className="mt-2 break-all text-xs font-semibold text-rose-700">
+                    API: {apiUrl}
+                  </p>
+                )}
+              </div>
+            )}
+            <p className={`${apiError ? "hidden" : ""} text-lg font-black text-slate-950`}>
               কোনো কোর্স পাওয়া যায়নি
             </p>
-            <p className="mt-2 text-sm text-slate-500">
+            <p className={`${apiError ? "hidden" : ""} mt-2 text-sm text-slate-500`}>
               অন্য category, level অথবা search keyword দিয়ে চেষ্টা করুন।
             </p>
             <button
               type="button"
               onClick={resetFilters}
-              className="mt-5 inline-flex min-h-10 items-center justify-center rounded-lg bg-blue-600 px-4 text-sm font-bold text-white transition hover:bg-blue-700"
+              className={`${apiError ? "hidden" : "inline-flex"} mt-5 min-h-10 items-center justify-center rounded-lg bg-blue-600 px-4 text-sm font-bold text-white transition hover:bg-blue-700`}
             >
               সব কোর্স দেখুন
             </button>
