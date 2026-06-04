@@ -3,8 +3,24 @@
 import { toast } from 'react-toastify';
 
 const OrderButton = () => {
-  const handleOrder = () => {
-    toast.success('Pyment SuccessFully');
+  const handleOrder = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/checkout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ courseId: 'course-id' }), // Replace with actual course ID
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        window.location.href = data.url;
+        toast.success('অর্ডার সফল হয়েছে! দয়া করে পেমেন্ট সম্পন্ন করুন।');
+      }
+    } catch (error) {
+      toast.error('অর্ডার করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+    }
   };
 
   return (
