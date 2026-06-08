@@ -30,7 +30,10 @@ const LoginPage = () => {
 
     if (data) {
       toast.success('Logged in successfully! 🎉');
-      router.push('/');
+      const callbackUrl = new URLSearchParams(window.location.search).get(
+        'callbackUrl'
+      );
+      router.push(callbackUrl || '/');
     }
 
     if (error) {

@@ -2,7 +2,7 @@
 
 import { toast } from 'react-toastify';
 
-const OrderButton = () => {
+const OrderButton = ({ userData }) => {
   const handleOrder = async () => {
     try {
       const res = await fetch(`http://localhost:5000/checkout`, {
@@ -10,15 +10,30 @@ const OrderButton = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ courseId: 'course-id' }), // Replace with actual course ID
+        body: JSON.stringify({
+          product: {
+            name: userData.courseName,
+            image: userData.courseImage,
+            price: userData.coursePrice,
+          },
+        }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
+      const data = await res.json();
+
+      if (!res.ok) {
+        // সার্ভার থেকে error message দেখান
+        toast.error(`সমস্যা: ${data.error || 'অজানা সমস্যা'}`);
+        return;
+      }
+
+      if (data.url) {
         window.location.href = data.url;
-        toast.success('অর্ডার সফল হয়েছে! দয়া করে পেমেন্ট সম্পন্ন করুন।');
+      } else {
+        toast.error('Payment URL পাওয়া যায়নি।');
       }
     } catch (error) {
+      console.error('Checkout error:', error);
       toast.error('অর্ডার করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
     }
   };
